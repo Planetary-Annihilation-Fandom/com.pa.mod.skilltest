@@ -1,0 +1,32 @@
+{
+    "context": "client",
+    "identifier": "com.pa.mod.skilltest",
+    "display_name": "Skill Test",
+    "description": "Generates randomized strategies. Adds excitement, interest and surprise to the game. Whether you can win with a strategy is not guaranteed. Whether you will feel like a cool guy - definitely.",
+    "author": "Kirill Gasanov, Ferretmaster, Den4ik Storm",
+    "version": "1.0",
+    "build": "120773",
+    "date": "2024-06-16",
+    "signature": "get fun!",
+    "forum": "https://steamcommunity.com/app/386070/discussions/0/4349990638025616760/",
+    "icon": "https://raw.githubusercontent.com/EGSP/strat-roulette/main/icon.jpg",
+    "priority": 100,
+    "category": [
+        "titans",
+        "in-game",
+        "client",
+        "ui",
+        "gambling"
+    ],
+    "scenes": {
+        "LiveGame_FloatZone": [
+            "coui://ui/mods/mod.skilltest/floatzone/strat.js"
+        ],
+        "live_game": [
+            "coui://ui/mods/mod.skilltest/hook.js"
+        ]
+    },
+    "dependencies": [
+        "com.pa.raevn.rfloatframe"
+    ]
+}
