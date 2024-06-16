@@ -23,7 +23,7 @@
             "icon":"coui://pa/units/air/air_factory/air_factory_icon_buildbar.png",
             "placement":["land","naval"],
             "faction":"mla",
-            "pick_first_weight":0.5
+            "pick_first_weight":0.2
         },
         {
             "id":3,
@@ -118,7 +118,7 @@
             "tier": 1,
             "icon": "coui://pa/units/air/l_air_factory/l_air_factory_icon_buildbar.png",
             "placement":["land","naval"],
-            "pick_first_weight":0.5,
+            "pick_first_weight":0.2,
             "faction":"legion",
             "modification":"legion"
         },
@@ -571,9 +571,11 @@
             "id": 33,
             "content":"harass using orbital defence",
             "planet_conditions":["land","naval"],
-            "stage_conditions":["earlygame","midgame","endgame"],
+            "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
-            "faction":"any"
+            "faction":"any",
+
+            "weight":0.5
         },
         {
             "id": 34,
@@ -591,19 +593,23 @@
             "id": 35,
             "content":"harass metal extractors with almaz",
             "planet_conditions":["land","naval"],
-            "stage_conditions":["earlygame","midgame","endgame"],
+            "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
             "faction":"legion",
-            "modification":"sw2"
+            "modification":"sw2",
+
+            "weight":0.5
         },
         {
             "id": 36,
             "content":"harass metal extractors with andreas",
             "planet_conditions":["land","naval"],
-            "stage_conditions":["earlygame","midgame","endgame"],
+            "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
             "faction":"mla",
-            "modification":"sw2"
+            "modification":"sw2",
+
+            "weight":0.5
         },
         {
             "id": 37,
@@ -631,7 +637,7 @@
         },
         {
             "id": 40,
-            "content":"control land units only from factories",
+            "content":"control land combat units from factories",
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot","vehicle"],
