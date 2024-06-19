@@ -12,7 +12,7 @@ const legion_commanders_catalog = [
 const stage_conditions_EXAMPLE = ["modifier", "earlygame", "midgame", "endgame"]
 const planet_conditions_EXAMPLE = ["any", "land", "naval", "orbital"]
 const placement_types_EXAMPLE = ["land", "naval", "orbital"]
-const modification_types_EXAMPLE = ["vanilla", "legion", "sw2", "s17"]
+const modification_types_EXAMPLE = ["vanilla", "legion", "sw2", "s17","thorosmen"]
 
 const fill_stage_recursion_depth_max = 4
 
@@ -274,6 +274,11 @@ function load_data() {
         if (_.includes(identifiers, "pa.mla.unit.addon") ||
             _.includes(identifiers, "pa.mla.unit.addon.dev")) {
             player_modifications.push("sw2")
+        }
+
+        if(_.includes(identifiers, "com.pa.loloares.throsmen") ||
+            _.includes(identifiers, "com.pa.loloares.throsmen.dev")) {
+            player_modifications.push("thorosmen")
         }
     })
 

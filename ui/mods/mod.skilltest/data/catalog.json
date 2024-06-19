@@ -210,12 +210,15 @@
         {"left":[1011], "right": [20,53]},
         {"row":[2000,71,8002,9004, 61001, 62001]},
         {"row":[69,68,70,71]},
-        {"row":[1007,19]},
+        {"left":[1007],"right":[19,92],"note":"commander not allowed to change position"},
         {"left":[21,22], "right": [1006, 15]},
         {"row":[54001, 54000, 54002]},
-
+        {"row":[77,25], "note":"metal extractors"},
         {"row":[6004, 6002]},
-        {"row":[59005,59004]}
+        {"row":[59005,59004], "note":"earthsakers spam/no"},
+        {"left":[78], "right":[3,6,9,12,14,30,47,49,51,52,32,37,70,71,79],
+         "note":"build only t2 units that don't do damage"},
+        {"left":[1008,93],"right":[42],"note":"nukes no/do"}
     ],
 
     "items": [
@@ -808,33 +811,6 @@
         },
         {
             "id": 58,
-            "content": [
-                "spam enforcers",
-                "spam minimans",
-                "spam necromancers",
-                "spam monstrosity",
-                "spam praetorians"
-            ],
-            "planet_conditions":["land"],
-            "stage_conditions":["midgame"],
-            "factory_conditions":["bot"],
-            "faction":"legion",
-            "modification":"legion"
-        },
-        {
-            "id": 59,
-            "content":[
-                "build thor titan",
-                "spam thor titans"
-            ],
-            "planet_conditions":["land"],
-            "stage_conditions":["endgame"],
-            "factory_conditions":["bot"],
-            "faction":"legion",
-            "modification":"legion"
-        },
-        {
-            "id": 58,
             "content":[
                 "spam stokes",
                 "spam shanks",
@@ -986,7 +962,7 @@
         },
         {
             "id": 70,
-            "content":"produce attack bots with unit canons only",
+            "content":"produce t2 attack bots with unit canons only",
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot"],
@@ -1050,13 +1026,94 @@
             "faction":"any"
         },
         {
-            "id": -1,
-            "content":"copy paste",
-            "planet_conditions":[],
-            "stage_conditions":[],
-            "factory_conditions":[],
+            "id": 77,
+            "content":"build metal assimilators instead t2 extractors",
+            "planet_conditions":["land","naval"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["any"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 78,
+            "content":"build only t2 units that don't do damage",
+            "planet_conditions":["any"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["vehicle"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 79,
+            "content":"destroy a big army with ggspider semi titan",
+            "planet_conditions":["land"],
+            "stage_conditions":["endgame"],
+            "factory_conditions":["any"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 80,
+            "content":"carry a titan to another planet with thorondor",
+            "planet_conditions":["orbital"],
+            "stage_conditions":["endgame"],
+            "factory_conditions":["any"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 89,
+            "content":"only build toblerone mobile antinukes as antinukes",
+            "planet_conditions":["any"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["any"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 90,
+            "content": [
+                "spam enforcers",
+                "spam minimans",
+                "spam necromancers",
+                "spam monstrosity",
+                "spam praetorians"
+            ],
+            "planet_conditions":["land"],
+            "stage_conditions":["midgame"],
+            "factory_conditions":["bot"],
             "faction":"legion",
             "modification":"legion"
+        },
+        {
+            "id": 91,
+            "content":[
+                "build thor titan",
+                "spam thor titans"
+            ],
+            "planet_conditions":["land"],
+            "stage_conditions":["endgame"],
+            "factory_conditions":["bot"],
+            "faction":"legion",
+            "modification":"legion"
+        },
+        {
+            "id": 92,
+            "content":"carry your commander in the binho UFO",
+            "planet_conditions":["land","naval"],
+            "stage_conditions":["midgame","endgame"],
+            "factory_conditions":["air"],
+            "faction":"mla",
+            "modification":"thorosmen"
+        },
+        {
+            "id": 93,
+            "content":"use the heal spells instead of the nukes",
+            "planet_conditions":["land","naval"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["any"],
+            "faction":"mla",
+            "modification":"thorosmen"
         },
         {
             "id": -1,
@@ -1064,8 +1121,8 @@
             "planet_conditions":[],
             "stage_conditions":[],
             "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
+            "faction":"",
+            "modification":""
         },
         {
             "id": -1,
@@ -1073,8 +1130,8 @@
             "planet_conditions":[],
             "stage_conditions":[],
             "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
+            "faction":"",
+            "modification":""
         },
         {
             "id": -1,
@@ -1082,8 +1139,8 @@
             "planet_conditions":[],
             "stage_conditions":[],
             "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
+            "faction":"",
+            "modification":""
         },
         {
             "id": -1,
@@ -1091,8 +1148,8 @@
             "planet_conditions":[],
             "stage_conditions":[],
             "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
+            "faction":"",
+            "modification":""
         },
         {
             "id": -1,
@@ -1100,17 +1157,8 @@
             "planet_conditions":[],
             "stage_conditions":[],
             "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
-        },
-        {
-            "id": -1,
-            "content":"copy paste",
-            "planet_conditions":[],
-            "stage_conditions":[],
-            "factory_conditions":[],
-            "faction":"legion",
-            "modification":"legion"
+            "faction":"",
+            "modification":""
         }
 
 
