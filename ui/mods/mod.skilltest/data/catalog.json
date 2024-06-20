@@ -1126,13 +1126,15 @@
             "weight":"0.3"
         },
         {
-            "id": -1,
-            "content":"copy paste",
-            "planet_conditions":[],
-            "stage_conditions":[],
-            "factory_conditions":[],
-            "faction":"",
-            "modification":""
+            "id": 95,
+            "content":[
+                "remove all t1 factories",
+                "destroy all t1 combat units"
+            ],
+            "planet_conditions":["any"],
+            "stage_conditions":["midgame"],
+            "factory_conditions":["any"],
+            "faction":"any"
         },
         {
             "id": -1,
