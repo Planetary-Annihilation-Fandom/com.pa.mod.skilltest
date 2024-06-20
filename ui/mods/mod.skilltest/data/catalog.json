@@ -462,7 +462,7 @@
         },
         {
             "id": 20,
-            "content":"boost first factory with 50 metal",
+            "content":"boost first factory with 5 fabs",
             "planet_conditions":["any"],
             "stage_conditions":["earlygame"],
             "factory_conditions":["any"],
