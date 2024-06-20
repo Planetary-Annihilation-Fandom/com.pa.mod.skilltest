@@ -372,7 +372,15 @@ function data_build_factories(catalog) {
         if (factory.faction == undefined) {
             factory.faction = "any"
         }
+
+        if(factory.modification == undefined) {
+            factory.modification = "vanilla"
+        }
     }
+    
+    catalog.factories = _.filter(catalog.factories, function (factory) {
+        return factory.modification == 'vanilla' || _.includes(player_modifications, factory.modification)
+    })
 }
 
 
