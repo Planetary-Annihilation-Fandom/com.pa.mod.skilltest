@@ -248,7 +248,8 @@
                 {"id":12, "content":"no t2 land energy generators"},
                 {"id":13, "content":"commander not allowed to build energy"},
                 {"id":14, "content":"dont use shift key | order queue"},
-                {"id":15, "content":"dont use hotkeys"}
+                {"id":15, "content":"dont use hotkeys"},
+                {"id":16, "content":"dont use area orders"}
             ],
             "planet_conditions":["any"],
             "stage_conditions":["modifier"],
@@ -419,8 +420,10 @@
         {
             "id":15,
             "content": [
-                {"id": 0, "content": "build line base"},
-                {"id": 1, "content": "build cross base"}
+                {"id": 0, "content": "build line base",
+                    "note":"build a base in the shape of a line"},
+                {"id": 1, "content": "build cross base",
+                    "note":"build a base in the shape of a cross"}
             ],
             "planet_conditions":["land","naval"],
             "stage_conditions":["modifier"],
@@ -430,6 +433,7 @@
         {
             "id": 16,
             "content":"fab drops",
+            "note":"I think this task can be turned into a few specific variations of it",
             "planet_conditions":["land"],
             "stage_conditions":["earlygame"],
             "factory_conditions":["bot","vehicle"],
@@ -454,6 +458,7 @@
         {
             "id": 19,
             "content":"commander rush",
+                "note":"the commander is attacking the enemy base",
             "planet_conditions":["any"],
             "stage_conditions":["earlygame","midgame"],
             "factory_conditions":["any"],
@@ -480,8 +485,7 @@
         },
         {
             "id": 22,
-            "content":[
-                "build t2 factories as proxy"],
+            "content":["build t2 factories as proxy"],
             "planet_conditions":["any"],
             "stage_conditions":["midgame"],
             "factory_conditions":["any"],
@@ -490,6 +494,7 @@
         {
             "id": 23,
             "content":"attempt snipe with mines",
+                "note":"use mines to kill commander",
             "planet_conditions":["naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
             "factory_conditions":["naval"],
@@ -515,6 +520,7 @@
         {
             "id": 26,
             "content":"early invasion",
+                "note":"take this task from the original",
             "planet_conditions":["orbital"],
             "stage_conditions":["earlygame"],
             "factory_conditions":["any"],
@@ -523,6 +529,7 @@
         {
             "id": 27,
             "content":"teleporter rush",
+                "note":"take this task from the original",
             "planet_conditions":["land","orbital"],
             "stage_conditions":["midgame"],
             "factory_conditions":["any"],
@@ -533,6 +540,7 @@
         {
             "id": 28,
             "content":"reclaim heavy",
+                "note":"use world patrol to reclaim or smth like that",
             "planet_conditions":["any"],
             "stage_conditions":["modifier"],
             "factory_conditions":["any"],
@@ -547,7 +555,7 @@
             "faction":"any"
         },
         {
-            "id": 30,
+            "id": -1,
             "content":"spam kaiju",
             "planet_conditions":["naval"],
             "stage_conditions":["midgame","endgame"],
@@ -565,6 +573,7 @@
         {
             "id": 32,
             "content":"t2 bot drop",
+                "note":"i dont know what it can be used for",
             "planet_conditions":["land"],
             "stage_conditions":["midgame","endgame"],
             "factory_conditions":["bot"],
@@ -640,7 +649,12 @@
         },
         {
             "id": 40,
-            "content":"control land combat units from factories",
+            "content":[
+                {"id":0,"content":"control land combat units from factories",
+                    "note":"player should give orders only through factories"},
+                {"id":1,"content":"all factories in patrol mode",
+                    "note":"player should give patrol orders for each factory. Still can manually control produced units"}
+            ],
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot","vehicle"],
@@ -665,6 +679,7 @@
         {
             "id": 43,
             "content":"reclaim rush",
+                "note":"message should be more descriptive it think, cause even i dont know what exactly it is",
             "planet_conditions":["land","naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
             "factory_conditions":["any"],
@@ -722,6 +737,7 @@
                 "kill commander with sxx",
                 "kill commander with omegas"
             ],
+                "note":"i think it's probably better to simplify these tasks and similar ones.",
             "planet_conditions":["land","naval"],
             "stage_conditions":["endgame"],
             "factory_conditions":["any"],
@@ -962,7 +978,7 @@
         },
         {
             "id": 70,
-            "content":"produce t2 attack bots with unit canons only",
+            "content":"produce t2 combat bots with unit canons only",
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot"],
@@ -971,6 +987,7 @@
         {
             "id":71,
             "content":"bot heavy without dox",
+                "note":"spam bots+dont produce dox units - generally",
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot"],
@@ -1036,7 +1053,7 @@
         },
         {
             "id": 78,
-            "content":"build only t2 units that don't do damage",
+            "content":"build non-combat t2 units only",
             "planet_conditions":["any"],
             "stage_conditions":["modifier"],
             "factory_conditions":["vehicle"],
@@ -1137,13 +1154,12 @@
             "faction":"any"
         },
         {
-            "id": -1,
-            "content":"copy paste",
-            "planet_conditions":[],
-            "stage_conditions":[],
-            "factory_conditions":[],
-            "faction":"",
-            "modification":""
+            "id": 96,
+            "content":"factories can produce only one type of unit",
+            "planet_conditions":["any"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["any"],
+            "faction":"any"
         },
         {
             "id": -1,
