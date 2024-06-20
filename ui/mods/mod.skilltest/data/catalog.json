@@ -1116,13 +1116,14 @@
             "modification":"thorosmen"
         },
         {
-            "id": -1,
-            "content":"copy paste",
-            "planet_conditions":[],
-            "stage_conditions":[],
-            "factory_conditions":[],
-            "faction":"",
-            "modification":""
+            "id": 94,
+            "content":"play only through pip/secondary camera",
+            "planet_conditions":["any"],
+            "stage_conditions":["modifier"],
+            "factory_conditions":["any"],
+            "faction":"any",
+
+            "weight":"0.3"
         },
         {
             "id": -1,
