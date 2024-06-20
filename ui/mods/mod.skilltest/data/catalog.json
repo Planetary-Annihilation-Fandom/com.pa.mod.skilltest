@@ -723,7 +723,7 @@
                 "kill commander with omegas"
             ],
             "planet_conditions":["land","naval"],
-            "stage_conditions":["midgame","endgame"],
+            "stage_conditions":["endgame"],
             "factory_conditions":["any"],
             "faction":"mla"
         },
