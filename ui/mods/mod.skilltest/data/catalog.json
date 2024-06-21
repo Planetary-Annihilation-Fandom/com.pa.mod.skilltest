@@ -511,7 +511,7 @@
         },
         {
             "id": 25,
-            "content":"build metal generators instead extractors",
+            "content":"build metal generators instead t2 extractors",
             "planet_conditions":["naval","land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["any"],
