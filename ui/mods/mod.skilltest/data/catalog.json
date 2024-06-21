@@ -218,7 +218,8 @@
         {"row":[59005,59004], "note":"earthsakers spam/no"},
         {"left":[78], "right":[3,6,9,12,14,30,47,49,51,52,32,37,70,71,79],
          "note":"build only t2 units that don't do damage"},
-        {"left":[1008,93],"right":[42],"note":"nukes no/do"}
+        {"left":[1008,93],"right":[42],"note":"nukes no/do"},
+        {"row":[40000,40001], "note":"factories orders"}
     ],
 
     "items": [
@@ -1090,11 +1091,11 @@
         {
             "id": 90,
             "content": [
-                "spam enforcers",
-                "spam minimans",
-                "spam necromancers",
-                "spam monstrosity",
-                "spam praetorians"
+                {"id": 0, "content": "spam enforcers"},
+                {"id": 1, "content": "spam minimans"},
+                {"id": 2, "content": "spam necromancers"},
+                {"id": 3, "content": "spam monstrosity"},
+                {"id": 4, "content": "spam praetorians"}
             ],
             "planet_conditions":["land"],
             "stage_conditions":["midgame"],
