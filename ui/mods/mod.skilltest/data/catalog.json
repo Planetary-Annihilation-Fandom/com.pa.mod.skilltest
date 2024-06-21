@@ -572,7 +572,7 @@
         },
         {
             "id": 32,
-            "content":"t2 bot pelican drop",
+            "content":"t2 bot transport drop",
                 "note":"i dont know what it can be used for",
             "planet_conditions":["land"],
             "stage_conditions":["midgame","endgame"],
@@ -581,7 +581,7 @@
         },
         {
             "id": 33,
-            "content":"harass using anchors",
+            "content":"harass using anti ground orbital defense",
             "planet_conditions":["land","naval"],
             "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
@@ -712,8 +712,8 @@
         {
             "id": 47,
             "content":[
-                "make sxx snipe",
-                "make omega snipe"
+                "attempt to kill commander with sxx snipe",
+                "attempt to kill commander with omega snipe"
             ],
             "planet_conditions":["orbital"],
             "stage_conditions":["midgame","endgame"],
@@ -723,8 +723,8 @@
         {
             "id": 48,
             "content":[
-                "make black knight snipe",
-                "make imperator snipe"
+                "attempt to kill commander with black knight snipe",
+                "attempt to kill commander imperator snipe"
             ],
             "planet_conditions":["orbital"],
             "stage_conditions":["endgame"],
@@ -795,7 +795,7 @@
             "id": 55,
             "content":[
                 "artillery rush",
-                "catapult rush"
+                "missile/rocket turret rush"
             ],
             "planet_conditions":["land", "naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
