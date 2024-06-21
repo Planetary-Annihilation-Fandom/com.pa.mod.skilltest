@@ -247,9 +247,9 @@
                 {"id":11, "content":"no factory production assist"},
                 {"id":12, "content":"no t2 land energy generators"},
                 {"id":13, "content":"commander not allowed to build energy"},
-                {"id":14, "content":"dont use shift key | order queue"},
-                {"id":15, "content":"dont use hotkeys"},
-                {"id":16, "content":"dont use area orders"}
+                {"id":14, "content":"don't use shift key | order queue"},
+                {"id":15, "content":"don't use hotkeys"},
+                {"id":16, "content":"don't use area orders"}
             ],
             "planet_conditions":["any"],
             "stage_conditions":["modifier"],
@@ -287,7 +287,7 @@
             "id":4,
             "content": [
                 "spam atlas titans",
-                "build atals titan"
+                "build atlas titan"
             ],
             "planet_conditions":["land"],
             "stage_conditions":["endgame"],
@@ -312,7 +312,7 @@
             "content": [
                 { "id": 0, "content": "spam levelers" },
                 { "id": 1, "content": "spam shellers" },
-                { "id": 2, "content": "spam vaguards" },
+                { "id": 2, "content": "spam vanguards" },
                 { "id": 3, "content": "spam manhattans" },
                 { "id": 4, "content": "dont build vanguards" }
             ],
@@ -420,9 +420,9 @@
         {
             "id":15,
             "content": [
-                {"id": 0, "content": "build line base",
+                {"id": 0, "content": "build main base in a straight line",
                     "note":"build a base in the shape of a line"},
-                {"id": 1, "content": "build cross base",
+                {"id": 1, "content": "build main base in the shape of a cross",
                     "note":"build a base in the shape of a cross"}
             ],
             "planet_conditions":["land","naval"],
@@ -493,7 +493,7 @@
         },
         {
             "id": 23,
-            "content":"attempt snipe with mines",
+            "content":"attempt commander kill using mines",
                 "note":"use mines to kill commander",
             "planet_conditions":["naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
@@ -528,7 +528,7 @@
         },
         {
             "id": 27,
-            "content":"teleporter rush",
+            "content":"aggressive teleporter push/rush",
                 "note":"take this task from the original",
             "planet_conditions":["land","orbital"],
             "stage_conditions":["midgame"],
@@ -572,7 +572,7 @@
         },
         {
             "id": 32,
-            "content":"t2 bot drop",
+            "content":"t2 bot pelican drop",
                 "note":"i dont know what it can be used for",
             "planet_conditions":["land"],
             "stage_conditions":["midgame","endgame"],
@@ -581,7 +581,7 @@
         },
         {
             "id": 33,
-            "content":"harass using orbital defence",
+            "content":"harass using anchors",
             "planet_conditions":["land","naval"],
             "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
@@ -650,7 +650,7 @@
         {
             "id": 40,
             "content":[
-                {"id":0,"content":"control land combat units from factories",
+                {"id":0,"content":"combat units can only be given orders via factory orders",
                     "note":"player should give orders only through factories"},
                 {"id":1,"content":"all factories in patrol mode",
                     "note":"player should give patrol orders for each factory. Still can manually control produced units"}
@@ -678,7 +678,7 @@
         },
         {
             "id": 43,
-            "content":"reclaim rush",
+            "content":"use reclaim on opponents live buildings/units",
                 "note":"message should be more descriptive it think, cause even i dont know what exactly it is",
             "planet_conditions":["land","naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
@@ -734,8 +734,8 @@
         {
             "id": 49,
             "content":[
-                "kill commander with sxx",
-                "kill commander with omegas"
+                "attempt to kill commander with sxx",
+                "attempt to kill with omegas"
             ],
                 "note":"i think it's probably better to simplify these tasks and similar ones.",
             "planet_conditions":["land","naval"],
@@ -746,8 +746,8 @@
         {
             "id": 50,
             "content":[
-                "kill commander with black knights",
-                "kill commander with imperators"
+                "attempt to kill commander with black knights",
+                "attempt to kill commander with imperators"
             ],
             "planet_conditions":["land","naval"],
             "stage_conditions":["midgame","endgame"],
@@ -764,7 +764,7 @@
         },
         {
             "id": 52,
-            "content":"make hornet snipe",
+            "content":"attempt to kill commander with hornets",
             "planet_conditions":["land","naval"],
             "stage_conditions":["midgame","endgame"],
             "factory_conditions":["air"],
@@ -795,7 +795,7 @@
             "id": 55,
             "content":[
                 "artillery rush",
-                "rocket launchers rush"
+                "catapult rush"
             ],
             "planet_conditions":["land", "naval"],
             "stage_conditions":["earlygame","midgame","endgame"],
@@ -1044,7 +1044,7 @@
         },
         {
             "id": 77,
-            "content":"build metal assimilators instead t2 extractors",
+            "content":"build metal assimilators instead of t2 extractors",
             "planet_conditions":["land","naval"],
             "stage_conditions":["modifier"],
             "factory_conditions":["any"],
