@@ -1,5 +1,12 @@
 const data_folder_path = 'coui://ui/mods/mod.skilltest/data/';
 
+const internet_check_urls = [
+    "https://github.com",
+    "https://www.google.com", 
+    "https://yandex.ru",
+]
+const catalog_repository_url = "https://raw.githubusercontent.com/Planetary-Annihilation-Fandom/com.pa.mod.skilltest/main/ui/mods/mod.skilltest/data/catalog.json"
+
 const legion_commanders_catalog = [
     "/pa/units/commanders/l_overwatch/l_overwatch.json",
     "/pa/units/commanders/l_cyclops/l_cyclops.json",
@@ -15,6 +22,8 @@ const placement_types_EXAMPLE = ["land", "naval", "orbital"]
 const modification_types_EXAMPLE = ["vanilla", "legion", "sw2", "s17","thorosmen"]
 
 const fill_stage_recursion_depth_max = 4
+
+var has_internet_connection = false; 
 
 handlers.commanders = function (payload) {
     commanders_PAYLOAD = payload
@@ -283,22 +292,57 @@ function load_data() {
     })
 
     // SECOND STEP: LOAD AND BUILD CATALOG
-    // structure schema
-    // {
-    //     id: number
-    //     content: string
-    //     planet_conditions: [string]
-    //     stage_conditions: [string]
-    // }
-    // loading catalog
-    $.getJSON(data_folder_path.concat('catalog.json')).then(function (data) {
+    has_internet_connection = false
+    for(var i = 0; i < internet_check_urls.length; i++){
+        var internet_check_url = internet_check_urls[i]
+
+        $.ajax({
+            url: internet_check_url,
+            async: false
+        }).done(function() {
+            set_online_status_true()
+        }).fail(function() {
+            console.log("no internet connection" + internet_check_url)
+        });
+        if(has_internet_connection) break
+    }
+
+    debug(has_internet_connection,"has internet connection")
+
+    if(!has_internet_connection){
+        console.log("loading catalog from: " + data_folder_path.concat('catalog.json'))
+        $.getJSON(data_folder_path.concat('catalog.json')).then(function (data) {
+            data.source = {
+                url: data_folder_path.concat('catalog.json'),
+                gate: "local",
+                timestamp: Date.now()
+            }
+            data_build_catalog(data)
+        });
+    }else{
+        console.log("loading catalog from: " + catalog_repository_url)
+        $.getJSON(catalog_repository_url, function(data){
+            data.source = {
+                url: catalog_repository_url,
+                gate: "online",
+                timestamp: Date.now()
+            }
+            data_build_catalog(data)
+        })
+    }
+
+    
+    function set_online_status_true(){
+        has_internet_connection = true
+    }
+
+    function data_build_catalog(data){
         data_build_items(data)
         data_build_factories(data)
 
         catalog = data
-        console.log('catalog:/')
-        console.log(catalog)
-    });
+        debug(catalog.source, "catalog source")
+    }
 }
 
 const content_nested_id_multiplier = 1000;

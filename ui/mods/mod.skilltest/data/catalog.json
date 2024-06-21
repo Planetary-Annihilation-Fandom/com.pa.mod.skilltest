@@ -1140,7 +1140,7 @@
             "factory_conditions":["any"],
             "faction":"any",
 
-            "weight":"0.3"
+            "weight":0.3
         },
         {
             "id": 95,
