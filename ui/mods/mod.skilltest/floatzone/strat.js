@@ -2,7 +2,7 @@ const data_folder_path = 'coui://ui/mods/mod.skilltest/data/';
 
 const internet_check_urls = [
     "https://github.com",
-    "https://www.google.com", 
+    "https://www.google.com",
     "https://yandex.ru",
 ]
 const catalog_repository_url = "https://raw.githubusercontent.com/Planetary-Annihilation-Fandom/com.pa.mod.skilltest/main/ui/mods/mod.skilltest/data/catalog.json"
@@ -19,18 +19,15 @@ const legion_commanders_catalog = [
 const stage_conditions_EXAMPLE = ["modifier", "earlygame", "midgame", "endgame"]
 const planet_conditions_EXAMPLE = ["any", "land", "naval", "orbital"]
 const placement_types_EXAMPLE = ["land", "naval", "orbital"]
-const modification_types_EXAMPLE = ["vanilla", "legion", "sw2", "s17","thorosmen"]
+const modification_types_EXAMPLE = ["vanilla", "legion", "sw2", "s17", "thorosmen"]
 
-const fill_stage_recursion_depth_max = 4
+const refill_stages_recursion_depth_max = 4
 
-var has_internet_connection = false; 
+var has_internet_connection = false;
 
-handlers.commanders = function (payload) {
-    commanders_PAYLOAD = payload
+var live_game_data = null;
 
-    load_data();
-}
-var commanders_PAYLOAD = null;
+var is_catalog_ready = false;
 
 //view model setup
 function stratModel() {
@@ -39,6 +36,8 @@ function stratModel() {
     self.land = ko.observable(true)
     self.naval = ko.observable(false)
     self.orbital = ko.observable(false)
+
+    self.strategy = ko.observable();
 
     self.modifiers = ko.observableArray([]);
     self.earlygame_tasks = ko.observableArray([]);
@@ -53,9 +52,63 @@ function stratModel() {
 }
 stratModel = new stratModel();
 
+handlers.skilltest_liveGameData = function (payload) {
+    live_game_data = payload
 
+    var functions_to_call = get_functions_to_call();
+    if (functions_to_call != null) {
+        for (var i = 0; i < functions_to_call.length; i++) {
+            var function_name = functions_to_call[i];
+            // Check if the function exists and call it
+            if (typeof window[function_name] === 'function') {
+                window[function_name]();
+            } else {
+                console.error('Invalid function name:', function_name);
+            }
+        }
+    }
+}
+
+// Called from the live_game_hook.js by functions_to_call
+function awake(){
+    ini_catalog();
+
+    if(is_strategy_saved()){
+        var strategy = load_strategy_from_localStore();
+        var lobby_id = get_lobby_id();
+        // console.log(strategy)
+        console.log("strategy.lobbyId == ", strategy.lobby_id, "lobby_id == ", lobby_id)
+        if(strategy.lobby_id == lobby_id){
+            set_strategy(strategy)            
+        }
+    }
+}
+
+/**
+ * Returns the list of player commanders from the live_game_data object.
+ *
+ * @return {Array} An array of strings representing the player commanders.
+ */
+function get_player_commanders(){
+    return live_game_data.commanders
+}
+function get_lobby_id(){
+    return live_game_data.lobbyId
+}
+function get_functions_to_call(){
+    return live_game_data.functions_to_call
+}
 // BUTTONS ---------------------------------------------------------------
 //controls the positioning of the frame
+
+model.processGenerateClick = function () {
+    common_button_actions()
+    api.audio.playSoundFromFile("/pa/audio/roulette.wav");
+
+    var strategy = create_new_strategy();
+    set_strategy(strategy)
+}
+
 model.stratLockEvent = function () {
     common_button_actions()
 
@@ -67,26 +120,6 @@ model.stratLockEvent = function () {
         lockFrame("strat_frame");
     }
 
-}
-
-model.processGenerateClick = function () {
-    common_button_actions()
-
-    //$("#generateStrat").css("opacity",0.5)
-    //_.delay(function(){$("#generateStrat").css("opacity",1.0)},3000)
-    api.audio.playSoundFromFile("/pa/audio/roulette.wav");
-
-    var new_strategy = get_new_strategy()
-
-    // debug(new_strategy, "new strategy")
-    stratModel.modifiers(new_strategy.modifiers)
-    stratModel.earlygame_tasks(new_strategy.earlygame_tasks)
-    stratModel.midgame_tasks(new_strategy.midgame_tasks)
-    stratModel.endgame_tasks(new_strategy.endgame_tasks)
-    stratModel.earlygame_factories(new_strategy.earlygame_factories)
-    stratModel.midgame_factories(new_strategy.midgame_factories)
-
-    stratModel.is_strategy_ready(true)
 }
 
 var stratUIExpanded = ko.observable(true);
@@ -247,10 +280,12 @@ var player_factions = []
 var player_modifications = []
 
 // STATIC FUNCTIONS -------------------------------------------------------------
-function load_data() {
+function ini_catalog() {
+    is_catalog_ready = false
+
     // FIRST STEP: GET PLAYER INFO
     // LOOK FOR FACTIONS
-    var player_commanders = commanders_PAYLOAD;
+    var player_commanders = get_player_commanders();
     for (var i = 0; i < player_commanders.length; i++) {
         if (_.includes(legion_commanders_catalog, player_commanders[i])) {
             player_factions.push("legion")
@@ -285,7 +320,7 @@ function load_data() {
             player_modifications.push("sw2")
         }
 
-        if(_.includes(identifiers, "com.pa.loloares.throsmen") ||
+        if (_.includes(identifiers, "com.pa.loloares.throsmen") ||
             _.includes(identifiers, "com.pa.loloares.throsmen.dev")) {
             player_modifications.push("thorosmen")
         }
@@ -293,23 +328,23 @@ function load_data() {
 
     // SECOND STEP: LOAD AND BUILD CATALOG
     has_internet_connection = false
-    for(var i = 0; i < internet_check_urls.length; i++){
+    for (var i = 0; i < internet_check_urls.length; i++) {
         var internet_check_url = internet_check_urls[i]
 
         $.ajax({
             url: internet_check_url,
             async: false
-        }).done(function() {
+        }).done(function () {
             set_online_status_true()
-        }).fail(function() {
+        }).fail(function () {
             console.log("no internet connection" + internet_check_url)
         });
-        if(has_internet_connection) break
+        if (has_internet_connection) break
     }
 
-    debug(has_internet_connection,"has internet connection")
+    debug(has_internet_connection, "has internet connection")
 
-    if(!has_internet_connection){
+    if (!has_internet_connection) {
         console.log("loading catalog from: " + data_folder_path.concat('catalog.json'))
         $.getJSON(data_folder_path.concat('catalog.json')).then(function (data) {
             data.source = {
@@ -317,36 +352,38 @@ function load_data() {
                 gate: "local",
                 timestamp: Date.now()
             }
-            data_build_catalog(data)
+            build_catalog_data(data)
         });
-    }else{
+    } else {
         console.log("loading catalog from: " + catalog_repository_url)
-        $.getJSON(catalog_repository_url, function(data){
+        $.getJSON(catalog_repository_url, function (data) {
             data.source = {
                 url: catalog_repository_url,
                 gate: "online",
                 timestamp: Date.now()
             }
-            data_build_catalog(data)
+            build_catalog_data(data)
         })
     }
 
-    
-    function set_online_status_true(){
+
+    function set_online_status_true() {
         has_internet_connection = true
     }
 
-    function data_build_catalog(data){
-        data_build_items(data)
-        data_build_factories(data)
+    function build_catalog_data(data) {
+        build_catalog_items(data)
+        build_catalog_factories(data)
 
         catalog = data
         debug(catalog.source, "catalog source")
+
+        is_catalog_ready = true
     }
 }
 
 const content_nested_id_multiplier = 1000;
-function data_build_items(catalog) {
+function build_catalog_items(catalog) {
     // setup confilict ids
     var generated_items = []
     var being_removed_item_ids = []
@@ -410,18 +447,18 @@ function data_build_items(catalog) {
     })
 }
 
-function data_build_factories(catalog) {
+function build_catalog_factories(catalog) {
     for (var i = 0; i < catalog.factories.length; i++) {
         var factory = catalog.factories[i]
         if (factory.faction == undefined) {
             factory.faction = "any"
         }
 
-        if(factory.modification == undefined) {
+        if (factory.modification == undefined) {
             factory.modification = "vanilla"
         }
     }
-    
+
     catalog.factories = _.filter(catalog.factories, function (factory) {
         return factory.modification == 'vanilla' || _.includes(player_modifications, factory.modification)
     })
@@ -528,6 +565,47 @@ function get_localized_string(key) {
 // STRATEGY GENERATOR -----------------------------------------------------------
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
+function save_strategy_to_localStore(){
+    var strategy = stratModel.strategy()
+
+    // save strategy to localStore
+    localStorage.setItem('skilltest_strategy', JSON.stringify(strategy))
+}
+
+function load_strategy_from_localStore(){
+    var strategy = JSON.parse(localStorage.getItem('skilltest_strategy'))
+    return strategy
+}
+
+function is_strategy_saved(){
+    return localStorage.getItem('skilltest_strategy') != null
+}
+
+function set_strategy(new_strategy){
+    stratModel.strategy(new_strategy)
+    stratModel.modifiers(new_strategy.modifiers)
+    stratModel.earlygame_tasks(new_strategy.earlygame_tasks)
+    stratModel.midgame_tasks(new_strategy.midgame_tasks)
+    stratModel.endgame_tasks(new_strategy.endgame_tasks)
+    stratModel.earlygame_factories(new_strategy.earlygame_factories)
+    stratModel.midgame_factories(new_strategy.midgame_factories)
+
+    stratModel.is_strategy_ready(true)
+
+    save_strategy_to_localStore()
+}
+
+function create_new_strategy() {
+    if (is_catalog_ready == false) {
+        api.Panel.message(api.panels["live_game"].id, "skilltest_getLiveGameData", { functions_to_call: ["create_new_strategy"] })
+        return;
+    }
+
+    var new_strategy = get_new_strategy()
+    new_strategy.lobby_id = get_lobby_id()
+
+    return new_strategy
+}
 
 function get_new_strategy() {
     var modifiers_count = get_random_value_inclusive(1, catalog.max_modifiers_count)
@@ -592,9 +670,9 @@ function get_new_strategy() {
 
     // GENERATE GAME STAGES
     function fill_stages_LOCAL() {
-        fill_stages_recursion_depth ++;
+        fill_stages_recursion_depth++;
         // PREVENT DEADLOCK
-        if(fill_stages_recursion_depth > fill_stage_recursion_depth_max){
+        if (fill_stages_recursion_depth > refill_stages_recursion_depth_max) {
             return
         }
         if (_.isEmpty(modifiers)) {
