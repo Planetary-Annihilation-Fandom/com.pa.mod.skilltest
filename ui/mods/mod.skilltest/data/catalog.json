@@ -248,9 +248,9 @@
                 {"id":11, "content":"no factory production assist"},
                 {"id":12, "content":"no t2 land energy generators"},
                 {"id":13, "content":"commander not allowed to build energy"},
-                {"id":14, "content":"don't use shift key | order queue"},
-                {"id":15, "content":"don't use hotkeys"},
-                {"id":16, "content":"don't use area orders"}
+                {"id":14, "content":"don't use shift key | order queue", "weight":0.05},
+                {"id":15, "content":"don't use hotkeys", "weight":0.05},
+                {"id":16, "content":"don't use area orders", "weight":0.05}
             ],
             "planet_conditions":["any"],
             "stage_conditions":["modifier"],
@@ -659,7 +659,9 @@
             "planet_conditions":["land"],
             "stage_conditions":["modifier"],
             "factory_conditions":["bot","vehicle"],
-            "faction":"any"
+            "faction":"any",
+
+            "weight":0.05
         },
         {
             "id": 41,

@@ -411,13 +411,15 @@ function build_catalog_items(catalog) {
                     stage_conditions: item.stage_conditions,
                     factory_conditions: item.factory_conditions,
                     faction: item.faction,
-                    modification: item.modification
+                    modification: item.modification,
+                    weight: item.weight
                 }
 
                 // make id and get content based on content_item type
                 if (content_item.constructor === Object) {
                     new_generated_item.id = item.id * content_nested_id_multiplier + content_item.id
                     new_generated_item.content = content_item.content
+                    new_generated_item.weight = content_item.weight
                 } else if (content_item.constructor === String) {
                     // if item id is 54 and multiplier is 1000 then id will be 54000 + i (position in array)
                     new_generated_item.id = item.id * content_nested_id_multiplier + i
