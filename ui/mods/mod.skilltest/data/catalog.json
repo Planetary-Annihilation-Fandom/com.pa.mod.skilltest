@@ -801,7 +801,7 @@
                 "missile/rocket turret rush"
             ],
             "planet_conditions":["land", "naval"],
-            "stage_conditions":["earlygame","midgame","endgame"],
+            "stage_conditions":["midgame","endgame"],
             "factory_conditions":["any"],
             "faction":"any"
         },
